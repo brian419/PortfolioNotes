@@ -12,7 +12,6 @@ import SwiftUI
 struct AllNotesView: View {
     
     @State private var action: Int? = 0
-    
     var body: some View {
         NavigationView {
             VStack {
@@ -32,6 +31,7 @@ struct AllNotesView: View {
                             }
                         }
                     }
+                
             }
             .padding()
         .background(blackColor2)

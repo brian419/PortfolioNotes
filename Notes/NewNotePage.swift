@@ -60,6 +60,7 @@ struct NotesView: View {
                         }
                     }
                 
+                
             }
             .padding()
             .frame(idealWidth: 100, maxWidth: .infinity, idealHeight: 100, maxHeight: .infinity, alignment: .center)
