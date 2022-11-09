@@ -23,12 +23,13 @@ struct ContentView: View {
                     .padding()
                     .foregroundColor(primaryColor)
 
-                NavigationLink(destination: NotesView(), tag: 1, selection: $action) {
-                    Text("")
+                NavigationLink(destination: NotesView().navigationBarBackButtonHidden(), tag: 1, selection: $action) {
+                    EmptyView()
                 }
+                    
                     .opacity(0)
-                NavigationLink(destination: AllNotesView(), tag: 2, selection: $action) {
-                    Text("")
+                NavigationLink(destination: AllNotesView().navigationBarBackButtonHidden(), tag: 2, selection: $action) {
+                    EmptyView()
                 }
                     .opacity(0)
                 
