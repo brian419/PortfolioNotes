@@ -11,6 +11,10 @@ import SwiftUI
 
 struct AllNotesView: View {
     
+    @State var text: String = UserDefaults.standard.string(forKey: "TEXT_KEY") ?? ""
+    @State var inputText: String = ""
+    @State var text2: String = UserDefaults.standard.string(forKey: "TEXT_KEY2") ?? ""
+    @State var nameText: String = ""
     @State private var action: Int? = 0
     var body: some View {
         NavigationView {
@@ -21,20 +25,35 @@ struct AllNotesView: View {
                 }
                     .opacity(0)
                 
-                Text("All notes")
-                    .frame(idealWidth: 100, maxWidth: .infinity, idealHeight: 100, maxHeight: .infinity, alignment: .center)
-                    .foregroundColor(Color.white)
-                    .toolbar {
-                        ToolbarItem() {
-                            Button("Done") {
-                                self.action = 1
-                            }
-                        }
-                    }
+                Section(header: Text("Name: ")) {
+                    Text(text2)
+                        .foregroundColor(primaryColor)
+                        .font(.custom("Helveticanue-Thin", size: 22))
+                }
+                .font(.custom("Helveticanue-Thin", size: 25))
+                .padding()
+                .foregroundColor(.white)
+
                 
+                Section(header: Text("Note: ")) {
+                    Text(text)
+                        .foregroundColor(primaryColor)
+                        .font(.custom("Helveticanue-Thin", size: 22))
+                }
+                .padding()
+                .foregroundColor(.white)
+                .font(.custom("Helveticanue-Thin", size: 25))
             }
+            .frame(idealWidth: 100, maxWidth: .infinity, idealHeight: 100, maxHeight: .infinity, alignment: .center)
             .padding()
-        .background(blackColor2)
+            .background(blackColor2)
+            .toolbar {
+                ToolbarItem() {
+                    Button("Done") {
+                        self.action = 1
+                    }
+                }
+            }
         }
     }
 }

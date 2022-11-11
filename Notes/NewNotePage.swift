@@ -19,8 +19,10 @@ extension UIScreen{
 
 
 struct NotesView: View {
-    
-    @State var sentences: String = ""
+    @State var text: String = UserDefaults.standard.string(forKey: "TEXT_KEY") ?? ""
+    @State var inputText: String = ""
+    @State var text2: String = UserDefaults.standard.string(forKey: "TEXT_KEY2") ?? ""
+    @State var nameText: String = ""
     @State private var action: Int? = 0
     
 
@@ -33,38 +35,53 @@ struct NotesView: View {
                 }
                     .opacity(0)
                 
-                Text("Type your note below")
-                    .font(.custom("Helveticanue-Thin", size: 25))
-                    .foregroundColor(primaryColor2)
-                    
-
-                TextField("Type your text here . . .", text: $sentences, axis: .vertical)
-                    .padding()
-                    .background(.black)
-                    .foregroundColor(primaryColor2)
-                    .border(.white)
-                    .font(.custom("Helveticanue-Thin", size: 20))
-                    .toolbar {
-                        ToolbarItem() {
-                            Button("Save") {
-                                self.action = 1
-                                //should be where we save data later
-                            }
-                        }
-                    }
-                    .toolbar {
-                        ToolbarItem(placement: .navigationBarLeading) {
-                            Button("Cancel") {
-                                self.action = 1
-                            }
-                        }
-                    }
+                Section(header: Text("Name:")) {
+                    TextField("Type", text: $nameText, axis: .vertical)
+                        .padding()
+                        .background(.black)
+                        .foregroundColor(primaryColor2)
+                        .border(.white)
+                        .font(.custom("Helveticanue-Thin", size: 25))
+                }
+                .padding()
+                .foregroundColor(primaryColor)
                 
+                Section(header: Text("Type your note below:")) {
+                    TextField("Type", text: $inputText, axis: .vertical)
+                        .padding()
+                        .background(.black)
+                        .foregroundColor(primaryColor2)
+                        .border(.white)
+                        .font(.custom("Helveticanue-Thin", size: 25))
+                }
+                .foregroundColor(primaryColor)
+                .padding()
                 
             }
             .padding()
             .frame(idealWidth: 100, maxWidth: .infinity, idealHeight: 100, maxHeight: .infinity, alignment: .center)
             .background(.black)
+            .toolbar {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Button("Cancel") {
+                        self.action = 1
+                    }
+                }
+            }
+            .toolbar {
+                ToolbarItem() {
+                    Button("Save") {
+                        self.action = 1
+                        UserDefaults.standard.set(inputText, forKey: "TEXT_KEY")
+                        text = inputText
+                        print(inputText)
+                        
+                        UserDefaults.standard.set(nameText, forKey: "TEXT_KEY2")
+                        text2 = nameText
+                        print(nameText)
+                    }
+                }
+            }
             
             
         }
