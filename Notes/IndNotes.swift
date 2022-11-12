@@ -10,7 +10,7 @@ let blackColor2 = Color.init(red: 0/255, green: 0/255, blue: 0/255, opacity: 1.0
 import SwiftUI
 
 struct IndNotesView: View {
-    
+
     @State var text: String = UserDefaults.standard.string(forKey: "TEXT_KEY") ?? ""
     @State var inputText: String = ""
     @State var text2: String = UserDefaults.standard.string(forKey: "TEXT_KEY2") ?? ""

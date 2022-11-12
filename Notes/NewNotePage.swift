@@ -17,7 +17,6 @@ extension UIScreen{
    static let screenSize = UIScreen.main.bounds.size
 }
 
-
 struct NewNoteView: View {
     @State var text: String = UserDefaults.standard.string(forKey: "TEXT_KEY") ?? ""
     @State var inputText: String = ""
@@ -82,8 +81,6 @@ struct NewNoteView: View {
                     }
                 }
             }
-            
-            
         }
     }
 }
