@@ -18,7 +18,7 @@ extension UIScreen{
 }
 
 
-struct NotesView: View {
+struct NewNoteView: View {
     @State var text: String = UserDefaults.standard.string(forKey: "TEXT_KEY") ?? ""
     @State var inputText: String = ""
     @State var text2: String = UserDefaults.standard.string(forKey: "TEXT_KEY2") ?? ""
@@ -90,6 +90,6 @@ struct NotesView: View {
 
 struct NotesView_Previews: PreviewProvider {
     static var previews: some View {
-        NotesView()
+        NewNoteView()
     }
 }
