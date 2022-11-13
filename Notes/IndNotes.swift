@@ -18,55 +18,64 @@ struct IndNotesView: View {
     @State private var action: Int? = 0
     var body: some View {
         NavigationView {
-            VStack {
-                
-                NavigationLink(destination: ContentView().navigationBarBackButtonHidden(), tag: 1, selection: $action) {
-                    EmptyView()
-                }
-                    .opacity(0)
-                
-                NavigationLink(destination: AllNotesView().navigationBarBackButtonHidden(), tag: 2, selection: $action) {
-                    EmptyView()
-                }
-                    .opacity(0)
-                
-                Section(header: Text("Name: ")) {
-                    Text(text2)
+            ScrollView {
+                VStack {
+                        
+                        NavigationLink(destination: ContentView().navigationBarBackButtonHidden(), tag: 1, selection: $action) {
+                            EmptyView()
+                        }
+                            .opacity(0)
+                        
+                        NavigationLink(destination: AllNotesView().navigationBarBackButtonHidden(), tag: 2, selection: $action) {
+                            EmptyView()
+                        }
+                            .opacity(0)
+                        
+                        Section(header: Text("Name: ")) {
+                            Text(text2)
+                                .foregroundColor(.white)
+                                .font(.custom("Helveticanue-Thin", size: 22))
+                        }
+                        .font(.custom("Helveticanue-Thin", size: 25))
+                        .padding()
                         .foregroundColor(primaryColor)
-                        .font(.custom("Helveticanue-Thin", size: 22))
-                }
-                .font(.custom("Helveticanue-Thin", size: 25))
-                .padding()
-                .foregroundColor(.white)
 
-                
-                Section(header: Text("Note: ")) {
-                    Text(text)
+                        
+                        Section(header: Text("Note: ")) {
+                            Text(text)
+                                .foregroundColor(.white)
+                                .font(.custom("Helveticanue-Thin", size: 22))
+                        }
+                        .padding()
                         .foregroundColor(primaryColor)
-                        .font(.custom("Helveticanue-Thin", size: 22))
+                        .font(.custom("Helveticanue-Thin", size: 25))
+                    }
+                    .padding()
+                    .background(blackColor2)
+                    .frame(maxWidth: .infinity)
+                    .toolbar {
+                        ToolbarItem(placement: .navigationBarLeading) {
+                            Button("Back") {
+                                self.action = 2
+                            }
+                            .foregroundColor(primaryColor)
+                        }
+                    }
+                    .toolbar {
+                        ToolbarItem() {
+                            Button("Done") {
+                                self.action = 1
+                            }
+                            .foregroundColor(primaryColor)
+                        }
                 }
-                .padding()
-                .foregroundColor(.white)
-                .font(.custom("Helveticanue-Thin", size: 25))
+                
             }
             .frame(idealWidth: 100, maxWidth: .infinity, idealHeight: 100, maxHeight: .infinity, alignment: .center)
-            .padding()
-            .background(blackColor2)
-            .toolbar {
-                ToolbarItem(placement: .navigationBarLeading) {
-                    Button("Back") {
-                        self.action = 2
-                    }
-                }
-            }
-            .toolbar {
-                ToolbarItem() {
-                    Button("Done") {
-                        self.action = 1
-                    }
-                }
-            }
+            .background(.black)
+
         }
+        
     }
 }
 
