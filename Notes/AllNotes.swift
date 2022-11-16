@@ -9,11 +9,17 @@ import SwiftUI
 
 struct AllNotesView: View {
     @State private var action: Int? = 0
+    @State var text2: String = UserDefaults.standard.string(forKey: "TEXT_KEY2") ?? ""
+    
+    //@State var passedText: String = ""
+    
     
     var body: some View {
+        //passedText = text2
         NavigationView {
             ScrollView {
                 VStack {
+                    
                     NavigationLink(destination: IndNotesView().navigationBarBackButtonHidden(), tag: 1, selection: $action) {
                         EmptyView()
                     }
@@ -27,17 +33,21 @@ struct AllNotesView: View {
                     Section(header: Text("Notes List")) {
                         
                         ForEach(1..<10, id: \.self) { i in
-                            Button("Note \(i)") {
+                            //                            Button("Note \(i)") {
+                            //                                self.action = 1
+                            //                            }
+                            Button("\(i). \(text2)") {
                                 self.action = 1
                             }
                             .padding()
                             .foregroundColor(.white)
                             .buttonStyle(MyButtonStyle())
                             .font(.custom("Helveticanue-Thin", size: 20))
-
+                            
                         }
+                        
                         ForEach(10..<11, id: \.self) { i in
-                            Button("Note \(i)") {
+                            Button("\(i). \(text2)") {
                                 self.action = 1
                             }
                             .padding()
@@ -83,6 +93,7 @@ struct MyButtonStyle: ButtonStyle {
             .cornerRadius(8.0)
     }
 }
+
 
 struct AllNotesView_Previews: PreviewProvider {
     static var previews: some View {

@@ -16,12 +16,13 @@ extension UIScreen{
 }
 
 struct NewNoteView: View {
-    @State var text: String = UserDefaults.standard.string(forKey: "TEXT_KEY") ?? ""
+    @State var text: [String] = UserDefaults.standard.stringArray(forKey: "TEXT_KEY") ?? [""]
     @State var inputText: String = ""
-    @State var text2: String = UserDefaults.standard.string(forKey: "TEXT_KEY2") ?? ""
+    @State var text2: [String] = UserDefaults.standard.stringArray(forKey: "TEXT_KEY2") ?? [""]
     @State var nameText: String = ""
     @State private var action: Int? = 0
     
+    @State var count: Int = 0
 
     var body: some View {
         NavigationView {
@@ -30,7 +31,7 @@ struct NewNoteView: View {
                 NavigationLink(destination: ContentView().navigationBarBackButtonHidden(), tag: 1, selection: $action) {
                     EmptyView()
                 }
-                    .opacity(0)
+                .opacity(0)
                 
                 Section(header: Text("Name:")) {
                     TextField("Type", text: $nameText, axis: .vertical)
@@ -74,21 +75,31 @@ struct NewNoteView: View {
             .toolbar {
                 ToolbarItem() {
                     Button("Save") {
+                        //                        count += 1
+                        //                        if count >= 2 {
+                        //                            UserDefaults.resetStandardUserDefaults()
+                        //                        }
                         self.action = 1
                         UserDefaults.standard.set(inputText, forKey: "TEXT_KEY")
-                        text = inputText
+                        text.append(inputText)
+                    
                         print(inputText)
                         
                         UserDefaults.standard.set(nameText, forKey: "TEXT_KEY2")
-                        text2 = nameText
+                        text2.append(nameText)
                         print(nameText)
                     }
                     .foregroundColor(primaryColor)
                 }
             }
+            
         }
     }
 }
+
+//ForEach(1..<10) { i in
+//  text[i] = inputText
+//}
 
 struct NotesView_Previews: PreviewProvider {
     static var previews: some View {
