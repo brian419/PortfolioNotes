@@ -5,10 +5,10 @@
 //  Created by Brian Son on 11/7/22.
 //
 
-let blackColor2 = Color.init(red: 0/255, green: 0/255, blue: 0/255, opacity: 1.0)
 
 import SwiftUI
 struct IndNotesView: View {
+    //i think the main problem here is that text is again a State property, instead of a binded property. Also, it takes a datatype of String here instead of StringArray
     @State var text: String = UserDefaults.standard.string(forKey: "TEXT_KEY") ?? ""
     @State var inputText: String = ""
     @State var text2: String = UserDefaults.standard.string(forKey: "TEXT_KEY2") ?? ""
@@ -57,7 +57,7 @@ struct IndNotesView: View {
                     
                     }
                     .padding()
-                    .background(blackColor2)
+                    .background(.black)
                     .frame(maxWidth: .infinity)
                     .toolbar {
                         ToolbarItem(placement: .navigationBarLeading) {

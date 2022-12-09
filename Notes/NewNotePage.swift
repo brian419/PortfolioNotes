@@ -5,8 +5,6 @@
 //  Created by Brian Son on 11/7/22.
 //
 
-let blackColor = Color.init(red: 0/255, green: 0/255, blue: 0/255, opacity: 1.0)
-
 import SwiftUI
 
 extension UIScreen{
@@ -14,6 +12,19 @@ extension UIScreen{
    static let screenHeight = UIScreen.main.bounds.size.height
    static let screenSize = UIScreen.main.bounds.size
 }
+
+extension View {
+    func placeholder<Content: View>(
+        when shouldShow: Bool,
+    alignment: Alignment = .leading,
+        @ViewBuilder placeholder: () -> Content) -> some View {
+            ZStack (alignment: alignment) {
+                placeholder().opacity(shouldShow ? 1 : 0)
+                self
+            }
+        }
+    }
+
 
 struct NewNoteView: View {
     @State var text: [String] = UserDefaults.standard.stringArray(forKey: "TEXT_KEY") ?? [""]
@@ -33,15 +44,13 @@ struct NewNoteView: View {
                 }
                 .opacity(0)
                 
-                Section(header: Text("Name:")) {
+                Section(header: Text("Name")) {
                     TextField("Type", text: $nameText, axis: .vertical)
                         .padding()
-                        .background(.black)
+                        //.background(Color(red: 28/255, green: 28/255, blue: 28/255))
                         .foregroundColor(.white)
-                        .border(.white)
+                        .border(Color(red: 28/255, green: 28/255, blue: 28/255))
                         .font(.custom("Helveticanue-Thin", size: 25))
-                        .border(.white)
-                    //change .border(.black) later
                 }
                 .padding()
                 .foregroundColor(primaryColor)
@@ -50,9 +59,9 @@ struct NewNoteView: View {
                 Section(header: Text("Type your note below:")) {
                     TextField("Type", text: $inputText, axis: .vertical)
                         .padding()
-                        .background(.black)
+                        //.background(Color(red: 28/255, green: 28/255, blue: 28/255))
                         .foregroundColor(.white)
-                        .border(.white)
+                        .border(Color(red: 28/255, green: 28/255, blue: 28/255))
                         .font(.custom("Helveticanue-Thin", size: 25))
                 }
                 .padding()
@@ -81,7 +90,7 @@ struct NewNoteView: View {
                         //                        }
                         self.action = 1
                         UserDefaults.standard.set(inputText, forKey: "TEXT_KEY")
-                        text.append(inputText)
+                        
                     
                         print(inputText)
                         
@@ -92,6 +101,7 @@ struct NewNoteView: View {
                     .foregroundColor(primaryColor)
                 }
             }
+            
             
         }
     }
